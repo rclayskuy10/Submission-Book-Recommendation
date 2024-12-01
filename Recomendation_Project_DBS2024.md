@@ -2,39 +2,81 @@
 # Recommendation Project DBS2024
 
 ## Overview
-Proyek ini bertujuan untuk membuat sistem rekomendasi buku berdasarkan dataset rekomendasi buku. 
-Dataset mencakup informasi buku, rating, dan data pengguna.
+Buku adalah media penting untuk menyampaikan informasi, pengetahuan, hingga cerita. Di era digital saat ini, tersedia begitu banyak buku dan informasi dengan berbagai topik, sehingga membuat pembaca sering kesulitan memilih buku yang sesuai dengan minat mereka. Untuk mengatasi masalah ini, sistem rekomendasi hadir sebagai solusi, membantu memprediksi dan menyarankan item yang mungkin menarik bagi pengguna.
+
+Sistem rekomendasi buku dirancang untuk mempermudah pengguna dalam menemukan buku yang sesuai dengan preferensi mereka. Selain itu, sistem ini juga dapat meningkatkan pengalaman pelanggan, memperluas eksposur buku, dan mendorong peningkatan penjualan. Sistem serupa telah diterapkan pada berbagai jenis produk, seperti film, musik, berita, dan lainnya.
+
+Oleh karena itu, penerapan sistem rekomendasi buku memberikan banyak manfaat, baik bagi pembaca, industri buku, maupun masyarakat secara umum. Sistem ini membantu pembaca menemukan buku yang relevan, mendukung pertumbuhan bisnis buku, serta meningkatkan minat baca dan keingintahuan di masyarakat.
 
 Model yang digunakan mencakup pendekatan Collaborative Filtering dan Content-Based Filtering.
 
 ## Business Understanding
+Penerapan sistem rekomendasi buku dapat memberikan pengalaman yang lebih personal bagi pengguna, meningkatkan kepuasan pelanggan, dan mendorong eksplorasi buku di luar kategori populer. Sistem ini juga berpotensi memperluas penjualan melalui strategi cross-selling, membangun komunitas pembaca yang solid, serta meningkatkan akurasi rekomendasi melalui analisis data dan sentimen pengguna. Contohnya, Netflix menggunakan algoritma canggih untuk merekomendasikan film dan serial berdasarkan riwayat tontonan dan preferensi pengguna. Pendekatan ini berhasil meningkatkan keterlibatan pengguna sekaligus memperpanjang durasi pelanggan tetap menggunakan platform tersebut.
 
 ### Problem Statement
-1. Bagaimana cara merekomendasikan buku berdasarkan minat pembaca?
-2. Bagaimana cara meningkatkan kepuasan pengguna dan eksplorasi buku?
+1. Bagaimana cara meningkatkan pengalaman pengguna dalam menemukan buku baru yang belum pernah dibaca sebelumnya?
+2. Bagaimana cara mempersonalisasi rekomendasi buku untuk setiap pengguna berdasarkan preferensi dan riwayat bacaan mereka?
+3. Bagaimana cara mengidentifikasi buku yang berpotensi diminati pengguna di luar kategori populer?
 
 ### Goals
-- Membuat model yang memberikan rekomendasi buku dengan akurasi tinggi.
-- Mempermudah pembaca menemukan buku berdasarkan riwayat bacaan mereka.
+1. Mengembangkan sistem rekomendasi yang dapat menyarankan buku baru secara akurat, bahkan jika pengguna belum pernah membaca buku terkait.
+2. Meningkatkan personalisasi rekomendasi berdasarkan preferensi individu dan pola bacaan pengguna.
+3. Memperluas eksplorasi pengguna dengan merekomendasikan buku di luar kategori atau genre populer.
 
 ### Solutions
-1. Menggunakan model collaborative filtering untuk rekomendasi.
-2. Memanfaatkan metode cosine similarity dalam content-based filtering.
+1. Menggunakan Content-Based Filtering dengan metode TF-IDF untuk mengubah deskripsi buku menjadi representasi numerik, yang kemudian dihitung menggunakan Cosine Similarity untuk mencari buku yang mirip.
+2. Memanfaatkan Collaborative Filtering dengan menggunakan user-item interactions dan matrix factorization untuk memberikan rekomendasi berdasarkan preferensi pengguna lainnya yang memiliki pola serupa.
+3. Menggunakan Cosine Similarity untuk mencari buku-buku yang belum pernah dibaca oleh pengguna namun memiliki kesamaan dengan buku yang mereka minati, dan memberikan rekomendasi yang beragam dari berbagai kategori.
 
 ## Data Understanding
-Dataset meliputi tiga file utama: 
-- **Books**: Informasi tentang judul, penulis, ISBN, dll.
-- **Ratings**: Penilaian dari pengguna terhadap buku.
-- **Users**: Detail tentang pengguna seperti usia dan lokasi.
+Dataset yang digunakan dalam proyek ini adalah Book Recommendation Dataset yang dapat diakses melalui situs Kaggle. Dataset ini tidak mencakup genre buku, sehingga dalam proyek ini, rekomendasi akan didasarkan pada preferensi pengguna terhadap penulis buku.
+
+Dataset ini terdiri dari tiga file utama:
+    - **Books**:
+    Format: CSV (Comma Separated Value).
+    Jumlah sampel: 271,360 data.
+    Kolom: 8 variabel.
+    Terdapat missing values pada beberapa kolom seperti Book-Title, Book-Author, dan Year-Of-Publication.
+    - **Ratings**:
+    Format: CSV (Comma Separated Value).
+    Jumlah sampel: 1,149,780 data.
+    Kolom: 3 variabel.
+    Tidak terdapat missing values pada file ini.
+    - **Users**:
+    Format: CSV (Comma Separated Value).
+    Jumlah sampel: 278,858 data.
+    Kolom: 3 variabel.
+    Tidak terdapat missing values pada file ini.
+
+    **Informasi Variable**
+Books
+
+ISBN : Kode Buku
+Book-Title : Judul Buku
+Book-Author: Penulis Buku
+Year-Of-Publication  : Tahun Terbit Buku
+Publisher : Penerbit Buku
+Image-URL-S: Ukuran Kecil Gambar Buku
+Image-URL-M : Ukuran Menengah Gambar Buku
+Image-URL-L : Ukuran Besar Gambar Buku
+Ratings
+
+Users-ID: Id pengguna
+ISBN: Kode Buku
+Book-Rating: Penilaian Buku
+Users
+
+Users-ID: Id Pengguna
+Location: Lokasi Pengguna
+Age: Umur Pengguna
 
 ## Data Preparation
 1. **Preprocessing**:
-    - Menangani missing value.
-    - Menghapus duplikat.
-    - Encoding fitur (user dan buku) untuk digunakan dalam model.
-
+    - Menangani missing values pada kolom-kolom penting seperti Book-Title, Book-Author, dan Year-Of-Publication.
+    - Menghapus duplikat pada data untuk memastikan hanya ada satu entri per buku.
+    - Encoding ID pengguna dan ISBN buku agar data dapat diproses oleh model.
 2. **Integrasi Data**:
-    - Menggabungkan data buku dan rating.
+    - Menggabungkan dataset buku dan rating menggunakan kolom ISBN untuk mendapatkan informasi lengkap tentang setiap buku yang dinilai oleh pengguna.
 
 ## Modeling
 ### Collaborative Filtering
