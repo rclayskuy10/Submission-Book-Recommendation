@@ -29,7 +29,7 @@ Penerapan sistem rekomendasi buku dapat memberikan pengalaman yang lebih persona
 3. Menggunakan Cosine Similarity untuk mencari buku-buku yang belum pernah dibaca oleh pengguna namun memiliki kesamaan dengan buku yang mereka minati, dan memberikan rekomendasi yang beragam dari berbagai kategori.
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini adalah Book Recommendation Dataset yang dapat diakses melalui situs Kaggle. Dataset ini tidak mencakup genre buku, sehingga dalam proyek ini, rekomendasi akan didasarkan pada preferensi pengguna terhadap penulis buku.
+Dataset yang digunakan dalam proyek ini adalah [Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/data) yang dapat diakses melalui situs Kaggle. Dataset ini tidak mencakup genre buku, sehingga dalam proyek ini, rekomendasi akan didasarkan pada preferensi pengguna terhadap penulis buku.
 
 Dataset ini terdiri dari tiga file utama:
     - **Books**:
