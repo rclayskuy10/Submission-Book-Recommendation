@@ -75,6 +75,7 @@ Dataset ini terdiri dari tiga file utama:
  **Univariate Analysis**
  
 **Books**
+
 Pada data Books, ditemukan tipe data yang tidak sesuai pada kolom Year-Of-Publication, sehingga perlu dilakukan konversi tipe data. Selain itu, kolom Image-URL-S, Image-URL-M, dan Image-URL-L akan dihapus        karena tidak relevan untuk pemodelan sistem rekomendasi. Berikut adalah jumlah nilai unik pada setiap variabel:
 - Jumlah ISBN Buku: 271,357
 - Jumlah ISBN Buku: 271,357
@@ -86,6 +87,7 @@ Pada data Books, ditemukan tipe data yang tidak sesuai pada kolom Year-Of-Public
 Terlihat bahwa jumlah ISBN buku tidak sama dengan jumlah Judul Buku, menunjukkan adanya data yang hilang atau duplikat. Oleh karena itu, langkah cleaning akan dilakukan pada data ini.
    
 **Ratings**
+
 ada data Ratings, tidak ditemukan error atau missing values. Berikut adalah jumlah nilai unik pada setiap variabel:
 - Jumlah User ID: 105,283
 - Jumlah ISBN Buku: 340,556
@@ -95,8 +97,9 @@ Terdapat 105,283 pengguna yang memberikan penilaian terhadap 340,556 buku. Distr
 ![Distribusi Rating Buku](https://github.com/user-attachments/assets/e8020183-9a2c-451e-85a2-c19cec43974f)
     
 **Users**
-    Berdasarkan informasi variabel pada data Users, ditemukan adanya missing value pada kolom Age. 
-    Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adalah distribusi usia pengguna yang tercatat:
+
+Berdasarkan informasi variabel pada data Users, ditemukan adanya missing value pada kolom Age. 
+Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adalah distribusi usia pengguna yang tercatat:
     
 ![Distribusi Umur Pengguna](https://github.com/user-attachments/assets/47fdad0c-4eae-4117-96c5-a1d710e83417)
 
