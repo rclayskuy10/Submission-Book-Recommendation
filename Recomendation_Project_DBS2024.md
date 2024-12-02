@@ -200,6 +200,7 @@ Perhitungan nilai akurasi rekomendasi dengan pendekatan Collaborative Filtering 
 ![image](https://github.com/user-attachments/assets/1ac954c2-2579-4e0d-8dd6-e643cd8f756d)
 
 Berikut hasil RMSE pada sistem rekomendasi:
+
 |   |                         RMSE: 0.35289653979879504 | 
 
 ## Conclusion
