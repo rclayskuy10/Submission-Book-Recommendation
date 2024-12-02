@@ -82,19 +82,23 @@ Pada data Books, ditemukan tipe data yang tidak sesuai pada kolom Year-Of-Public
 - Jumlah Penulis Buku: 102,022
 - Jumlah Tahun Terbit Buku: 116
 - Jumlah Penerbit Buku: 16,805
+- 
 Terlihat bahwa jumlah ISBN buku tidak sama dengan jumlah Judul Buku, menunjukkan adanya data yang hilang atau duplikat. Oleh karena itu, langkah cleaning akan dilakukan pada data ini.
    
 **Ratings**
 ada data Ratings, tidak ditemukan error atau missing values. Berikut adalah jumlah nilai unik pada setiap variabel:
 - Jumlah User ID: 105,283
 - Jumlah ISBN Buku: 340,556
+  
 Terdapat 105,283 pengguna yang memberikan penilaian terhadap 340,556 buku. Distribusi rating dapat dianalisis lebih lanjut untuk memahami pola penilaian pengguna.
-    ![Distribusi Rating Buku](https://github.com/user-attachments/assets/e8020183-9a2c-451e-85a2-c19cec43974f)
+
+![Distribusi Rating Buku](https://github.com/user-attachments/assets/e8020183-9a2c-451e-85a2-c19cec43974f)
     
 **Users**
-    Berdasarkan informasi variabel pada data Users, ditemukan adanya missing value pada kolom Age. Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adalah distribusi usia pengguna yang 
-    tercatat:
-    ![Distribusi Umur Pengguna](https://github.com/user-attachments/assets/47fdad0c-4eae-4117-96c5-a1d710e83417)
+    Berdasarkan informasi variabel pada data Users, ditemukan adanya missing value pada kolom Age. 
+    Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adalah distribusi usia pengguna yang tercatat:
+    
+![Distribusi Umur Pengguna](https://github.com/user-attachments/assets/47fdad0c-4eae-4117-96c5-a1d710e83417)
 
 # Data Preparation
 Persiapan data merupakan langkah penting dalam pengembangan model machine learning. Pada proyek ini, proses Data Preparation menjadi krusial untuk memastikan hasil analisis dan pemodelan yang akurat. Data yang tidak dipersiapkan dengan baik dapat memengaruhi kualitas model secara signifikan.
