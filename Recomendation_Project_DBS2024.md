@@ -201,7 +201,7 @@ Perhitungan nilai akurasi rekomendasi dengan pendekatan Collaborative Filtering 
 
 Berikut hasil RMSE pada sistem rekomendasi:
 
-|   |                         RMSE: 0.35289653979879504 | 
+    RMSE: 0.35289653979879504  
 
 ## Conclusion
 Sistem rekomendasi buku ini berhasil memberikan rekomendasi yang relevan dengan kebutuhan pengguna. Evaluasi menggunakan precision, recall, F1-score, dan RMSE menunjukkan performa model yang sangat baik.
