@@ -75,19 +75,20 @@ Dataset ini terdiri dari tiga file utama:
  **Univariate Analysis**
  
 **Books**
-     Pada data Books, ditemukan tipe data yang tidak sesuai pada kolom Year-Of-Publication, sehingga perlu dilakukan konversi tipe data. Selain itu, kolom Image-URL-S, Image-URL-M, dan Image-URL-L akan dihapus        karena tidak relevan untuk pemodelan sistem rekomendasi. Berikut adalah jumlah nilai unik pada setiap variabel:
-    - Jumlah ISBN Buku: 271,357
-    - Jumlah Judul Buku: 242,132
-    - Jumlah Penulis Buku: 102,022
-    - Jumlah Tahun Terbit Buku: 116
-    - Jumlah Penerbit Buku: 16,805
-    Terlihat bahwa jumlah ISBN buku tidak sama dengan jumlah Judul Buku, menunjukkan adanya data yang hilang atau duplikat. Oleh karena itu, langkah cleaning akan dilakukan pada data ini.
-    
+Pada data Books, ditemukan tipe data yang tidak sesuai pada kolom Year-Of-Publication, sehingga perlu dilakukan konversi tipe data. Selain itu, kolom Image-URL-S, Image-URL-M, dan Image-URL-L akan dihapus        karena tidak relevan untuk pemodelan sistem rekomendasi. Berikut adalah jumlah nilai unik pada setiap variabel:
+- Jumlah ISBN Buku: 271,357
+- Jumlah ISBN Buku: 271,357
+- Jumlah Judul Buku: 242,132
+- Jumlah Penulis Buku: 102,022
+- Jumlah Tahun Terbit Buku: 116
+- Jumlah Penerbit Buku: 16,805
+Terlihat bahwa jumlah ISBN buku tidak sama dengan jumlah Judul Buku, menunjukkan adanya data yang hilang atau duplikat. Oleh karena itu, langkah cleaning akan dilakukan pada data ini.
+   
 **Ratings**
-    ada data Ratings, tidak ditemukan error atau missing values. Berikut adalah jumlah nilai unik pada setiap variabel:
-    - Jumlah User ID: 105,283
-    - Jumlah ISBN Buku: 340,556
-    Terdapat 105,283 pengguna yang memberikan penilaian terhadap 340,556 buku. Distribusi rating dapat dianalisis lebih lanjut untuk memahami pola penilaian pengguna.
+ada data Ratings, tidak ditemukan error atau missing values. Berikut adalah jumlah nilai unik pada setiap variabel:
+- Jumlah User ID: 105,283
+- Jumlah ISBN Buku: 340,556
+Terdapat 105,283 pengguna yang memberikan penilaian terhadap 340,556 buku. Distribusi rating dapat dianalisis lebih lanjut untuk memahami pola penilaian pengguna.
     ![Distribusi Rating Buku](https://github.com/user-attachments/assets/e8020183-9a2c-451e-85a2-c19cec43974f)
     
 **Users**
