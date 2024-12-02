@@ -1,7 +1,7 @@
 
 # Recommendation Project DBS2024
 
-## Overview
+# Overview
 Buku adalah media penting untuk menyampaikan informasi, pengetahuan, hingga cerita. Di era digital saat ini, tersedia begitu banyak buku dan informasi dengan berbagai topik, sehingga membuat pembaca sering kesulitan memilih buku yang sesuai dengan minat mereka. Untuk mengatasi masalah ini, sistem rekomendasi hadir sebagai solusi, membantu memprediksi dan menyarankan item yang mungkin menarik bagi pengguna.
 
 Sistem rekomendasi buku dirancang untuk mempermudah pengguna dalam menemukan buku yang sesuai dengan preferensi mereka. Selain itu, sistem ini juga dapat meningkatkan pengalaman pelanggan, memperluas eksposur buku, dan mendorong peningkatan penjualan. Sistem serupa telah diterapkan pada berbagai jenis produk, seperti film, musik, berita, dan lainnya.
@@ -28,7 +28,7 @@ Penerapan sistem rekomendasi buku dapat memberikan pengalaman yang lebih persona
 2. Memanfaatkan Collaborative Filtering dengan menggunakan user-item interactions dan matrix factorization untuk memberikan rekomendasi berdasarkan preferensi pengguna lainnya yang memiliki pola serupa.
 3. Menggunakan Cosine Similarity untuk mencari buku-buku yang belum pernah dibaca oleh pengguna namun memiliki kesamaan dengan buku yang mereka minati, dan memberikan rekomendasi yang beragam dari berbagai kategori.
 
-## Data Understanding
+# Data Understanding
 Dataset yang digunakan dalam proyek ini adalah [Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/data) yang dapat diakses melalui situs Kaggle. Dataset ini tidak mencakup genre buku, sehingga dalam proyek ini, rekomendasi akan didasarkan pada preferensi pengguna terhadap penulis buku.
 
 Dataset ini terdiri dari tiga file utama:
@@ -87,9 +87,12 @@ Dataset ini terdiri dari tiga file utama:
     tercatat:
     ![Distribusi Umur Pengguna](https://github.com/user-attachments/assets/47fdad0c-4eae-4117-96c5-a1d710e83417)
 
-## Data Preparation
+# Data Preparation
 Persiapan data merupakan langkah penting dalam pengembangan model machine learning. Pada proyek ini, proses Data Preparation menjadi krusial untuk memastikan hasil analisis dan pemodelan yang akurat. Data yang tidak dipersiapkan dengan baik dapat memengaruhi kualitas model secara signifikan.
 Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
+## Intergration Data
+Pada tahap ini menggabungkan data Books dan Ratings agar dapat digunakan dalam pemodelan nantinya. untuk melakukan penggabungan data, dapat menggunakan code berikut:
+    books_rating = ratings.merge(books, on='ISBN', how='left')
 1. **Preprocessing**:
     - Menangani missing values pada kolom-kolom penting seperti Book-Title, Book-Author, dan Year-Of-Publication.
     - Menghapus duplikat pada data untuk memastikan hanya ada satu entri per buku.
