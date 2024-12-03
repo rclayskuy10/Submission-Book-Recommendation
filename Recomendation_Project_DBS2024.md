@@ -171,7 +171,8 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
 | 8 |                           The Cases That Haunt Us |    John Douglas |   
 | 9 | JOURNEY INTO DARKNESS (Lisa Drew Books (Paperb... | John E. Douglas |   
 
-## Hasil Training Model |   |                                                                                                                                         
+## Hasil Training Model 
+
 |--:|-----------------------------------------------------------------------------------------------------------------------------------------------------:|-
 |   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1945 - root_mean_squared_error: 0.0643 - val_loss: 0.6826 - val_root_mean_squared_error: 0.4080 |       
 |   |                                                                                                                                         Epoch 91/100 |       
