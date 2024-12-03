@@ -172,29 +172,29 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
 | 9 | JOURNEY INTO DARKNESS (Lisa Drew Books (Paperb... | John E. Douglas |   
 
 ## Hasil Training Model 
-|--:|-----------------------------------------------------------------------------------------------------------------------------------------------------:|
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1945 - root_mean_squared_error: 0.0643 - val_loss: 0.6826 - val_root_mean_squared_error: 0.4080 |       
-|   |                                                                                                                                         Epoch 91/100 |       
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 3ms/step - loss: 0.1940 - root_mean_squared_error: 0.0643 - val_loss: 0.6841 - val_root_mean_squared_error: 0.4081 |       
-|   |                                                                                                                                         Epoch 92/100 |   
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1928 - root_mean_squared_error: 0.0625 - val_loss: 0.6857 - val_root_mean_squared_error: 0.4082 |       
-|   |                                                                                                                                         Epoch 93/100 |      
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1898 - root_mean_squared_error: 0.0618 - val_loss: 0.6873 - val_root_mean_squared_error: 0.4084 |      
-|   |                                                                                                                                         Epoch 94/100 | 
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1917 - root_mean_squared_error: 0.0618 - val_loss: 0.6893 - val_root_mean_squared_error: 0.4086 |    
-|   |                                                                                                                                         Epoch 95/100 | 
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1890 - root_mean_squared_error: 0.0619 - val_loss: 0.6909 - val_root_mean_squared_error: 0.4087 |              
-|   |                                                                                                                                         Epoch 96/100 |                 
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1892 - root_mean_squared_error: 0.0609 - val_loss: 0.6929 - val_root_mean_squared_error: 0.4090 |             
-|   |                                                                                                                                        Epoch 97/100  |             
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1930 - root_mean_squared_error: 0.0591 - val_loss: 0.6946 - val_root_mean_squared_error: 0.4091 |               
-|   |                                                                                                                                         Epoch 98/100 |                
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1864 - root_mean_squared_error: 0.0565 - val_loss: 0.6968 - val_root_mean_squared_error: 0.4094 |                
-|   |                                                                                                                                       Epoch 99/100   |                 
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1904 - root_mean_squared_error: 0.0574 - val_loss: 0.6986 - val_root_mean_squared_error: 0.4095 |                 
-|   |                                                                                                                                       Epoch 100/100  |                
-|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1912 - root_mean_squared_error: 0.0556 - val_loss: 0.7003 - val_root_mean_squared_error: 0.4096 |
-|--:|-----------------------------------------------------------------------------------------------------------------------------------------------------:|
+
+|--:|---------------------------------------------------------------------------------------------:|-------------------------------------------------------:|
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1945 - root_mean_squared_error: 0.0643 -| val_loss: 0.6826 - val_root_mean_squared_error: 0.4080 |       
+|   |                                                                                                                                          Epoch 91/100 |       
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 3ms/step - loss: 0.1940 - root_mean_squared_error: 0.0643 -| val_loss: 0.6841 - val_root_mean_squared_error: 0.4081 |       
+|   |                                                                                                                                          Epoch 92/100 |   
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1928 - root_mean_squared_error: 0.0625 -| val_loss: 0.6857 - val_root_mean_squared_error: 0.4082 |       
+|   |                                                                                                                                          Epoch 93/100 |      
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1898 - root_mean_squared_error: 0.0618 -| val_loss: 0.6873 - val_root_mean_squared_error: 0.4084 |      
+|   |                                                                                                                                          Epoch 94/100 | 
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1917 - root_mean_squared_error: 0.0618 -| val_loss: 0.6893 - val_root_mean_squared_error: 0.4086 |    
+|   |                                                                                                                                          Epoch 95/100 | 
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1890 - root_mean_squared_error: 0.0619 -| val_loss: 0.6909 - val_root_mean_squared_error: 0.4087 |              
+|   |                                                                                                                                          Epoch 96/100 |                 
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1892 - root_mean_squared_error: 0.0609 -| val_loss: 0.6929 - val_root_mean_squared_error: 0.4090 |             
+|   |                                                                                                                                         Epoch 97/100  |             
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1930 - root_mean_squared_error: 0.0591 -| val_loss: 0.6946 - val_root_mean_squared_error: 0.4091 |               
+|   |                                                                                                                                          Epoch 98/100 |                
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 2s 2ms/step - loss: 0.1864 - root_mean_squared_error: 0.0565 -| val_loss: 0.6968 - val_root_mean_squared_error: 0.4094 |                
+|   |                                                                                                                                        Epoch 99/100   |                 
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1904 - root_mean_squared_error: 0.0574 -| val_loss: 0.6986 - val_root_mean_squared_error: 0.4095 |                 
+|   |                                                                                                                                        Epoch 100/100  |                
+|   | 1000/1000 ━━━━━━━━━━━━━━━━━━━━ 3s 2ms/step - loss: 0.1912 - root_mean_squared_error: 0.0556 -| val_loss: 0.7003 - val_root_mean_squared_error: 0.4096 |
 
 ## Metrics
 ![Training & Validation RMSE over Epochs](https://github.com/user-attachments/assets/e7e9a4a5-5fa9-43f6-9a83-bcc01c8b35bb)
