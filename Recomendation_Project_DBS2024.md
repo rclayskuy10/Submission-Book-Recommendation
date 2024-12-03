@@ -195,6 +195,21 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
 # Evaluation
 Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
 ## Content Based Filtering
+Untuk mengukur seberapa bagus akurasi rekomendasi, disini menggunakan 3 evaluasi yaitu Precision, Recall dan F1-Score
+- Precision Precision adalah perbandingan antara True Positive (TP) dengan banyaknya data yang diprediksi positif. rumus untuk Precision
+
+![image](https://github.com/user-attachments/assets/a209055a-3345-42bc-ac1e-34e2ab48aa40)
+
+- Recall Recall adalah perbandingan antara True Positive (TP) dengan banyaknya data yang sebenarnya positif. rumus untuk Recall
+
+![image](https://github.com/user-attachments/assets/3fcaef35-4b1c-45eb-8967-b454744b474e)
+
+- F1-Score F1-Score adalah harmonic mean dari precision dan recall. Nilai terbaik F1-Score adalah 1.0 dan nilai terburuknya adalah 0. Secara representasi, jika F1-Score punya skor yang baik mengindikasikan bahwa model klasifikasi k precision dan recall yang baik. rumus untuk F1-Score:
+
+![image](https://github.com/user-attachments/assets/37dd5aca-9f76-4ade-a26e-bc1f4f87ed4e)
+
+
+
 Pada Evaluasi hasil model, mendapatkan hasil sebagai berikut:
 |   |                                            Metric |           Value | 
 |--:|--------------------------------------------------:|----------------:|
@@ -204,6 +219,7 @@ Pada Evaluasi hasil model, mendapatkan hasil sebagai berikut:
 
 ## Collaborative Filtering
 Perhitungan nilai akurasi rekomendasi dengan pendekatan Collaborative Filtering dilakukan dengan pendekatan Root Mean Square Error (RMSE). RMSE adalah ukuran perbedaan antara angka (nilai populasi dan sampel) yang sering diterapkan yang diprediksi oleh estimator atau mode. RMSE menggambarkan deviasi standar sampel dari perbedaan antara nilai prediksi dan nilai observasi.
+
 ![image](https://github.com/user-attachments/assets/1ac954c2-2579-4e0d-8dd6-e643cd8f756d)
 
 Berikut hasil RMSE pada sistem rekomendasi:
