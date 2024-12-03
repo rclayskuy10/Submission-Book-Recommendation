@@ -220,6 +220,11 @@ Pada Evaluasi hasil model, mendapatkan hasil sebagai berikut:
 ## Collaborative Filtering
 Perhitungan nilai akurasi rekomendasi dengan pendekatan Collaborative Filtering dilakukan dengan pendekatan Root Mean Square Error (RMSE). RMSE adalah ukuran perbedaan antara angka (nilai populasi dan sampel) yang sering diterapkan yang diprediksi oleh estimator atau mode. RMSE menggambarkan deviasi standar sampel dari perbedaan antara nilai prediksi dan nilai observasi.
 
+## Dampak terhadap Business Understanding
+- Sistem rekomendasi meningkatkan pengalaman pengguna dalam menemukan buku baru.
+- Tujuan untuk meningkatkan personalisasi tercapai dengan baik.
+- Solusi membantu memperluas eksplorasi buku dan mendorong penjualan.
+
 ![image](https://github.com/user-attachments/assets/1ac954c2-2579-4e0d-8dd6-e643cd8f756d)
 
 Berikut hasil RMSE pada sistem rekomendasi:
