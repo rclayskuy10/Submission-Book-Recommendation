@@ -106,6 +106,13 @@ Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adala
 # Data Preparation
 Persiapan data merupakan langkah penting dalam pengembangan model machine learning. Pada proyek ini, proses Data Preparation menjadi krusial untuk memastikan hasil analisis dan pemodelan yang akurat. Data yang tidak dipersiapkan dengan baik dapat memengaruhi kualitas model secara signifikan.
 Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
+
+## Sampling Data
+Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan untuk sistem rekomendasi. Sampling dilakukan untuk mempercepat proses analisis dan pelatihan model, tanpa mengurangi kualitas data yang diperlukan, dapat menggunakan code berikut:
+
+    sampled_books = books.sample(frac=0.1, random_state=42)
+    sampled_ratings = ratings[ratings['ISBN'].isin(sampled_books['ISBN'])]
+
 ## Intergration Data
 Pada tahap ini menggabungkan data Books dan Ratings agar dapat digunakan dalam pemodelan nantinya. untuk melakukan penggabungan data, dapat menggunakan code berikut:
 
@@ -119,9 +126,30 @@ Pada proses penggabung bisa saja terdapat missing value, sehingga perlu melakuka
 Sebelumnya, terdapat rating yang bernilai 0, pada dasarnya rating tidak dimulai dari 0 melainkan dari satu. penyebab rating 0 bisa berbagai hal seperti pengguna tidak mengisi penilaian sehingga sistem akan memasukan nilai 0. untuk itu akan melakukan penghapusan juga pada data yang memiliki rating 0.
 
 ## Duplicated
-Pada sebuah data bisa terdapat duplikat, karena dalam pemodelan ini hanya akan menggunakan data unik, sehingga akan melakukan pembersihan pada data yang duplikat dengan code berikut:
+Pada sebuah data bisa terdapat duplikat, karena dalam pemodelan ini hanya akan menggunakan data unik, sehingga akan melakukan pembersihan pada data yang duplikat, dengan code berikut:
 
     preparation = books_clean.drop_duplicates('placeID')
+
+## Ekstraksi Fitur dengan TF-IDF
+Untuk pendekatan Content-Based Filtering, deskripsi buku diubah menjadi representasi numerik menggunakan TF-IDF, dapat menggunakan code berikut: 
+
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = vectorizer.fit_transform(books_clean['Book-Title'])
+    
+## Encode Label
+Beberapa atribut yang berbentuk kategori (seperti User-ID dan ISBN) diubah menjadi representasi numerik menggunakan encoding untuk memastikan kompatibilitas dengan algoritma machine learning, dengan code berikut :
+
+    from sklearn.preprocessing import LabelEncoder
+    label_encoder = LabelEncoder()
+    ratings['User-ID'] = label_encoder.fit_transform(ratings['User-ID'])
+    ratings['ISBN'] = label_encoder.fit_transform(ratings['ISBN'])
+
+## Split Data
+Dataset dibagi menjadi training dan testing untuk mengevaluasi performa model, dengan code berikut :
+
+    from sklearn.model_selection import train_test_split
+    train_data, test_data = train_test_split(ratings, test_size=0.2, random_state=42)
 
 # Modelling and Result
 Pada Modelling sistem rekomendasi akan menggunakan 2 pendeketan yaitu Metode Content Based Filtering dan Collaborative Filtering
@@ -139,20 +167,45 @@ Kekurangan:
 - Merekomendasikan item yang serupa
 - Tidak Mampu Menangani Perubahan Selera Pengguna
 
+## Collaborative-Based Filtering
+Pendekatan Collaborative-Based Filtering membantu pengguna menemukan buku yang relevan dengan cara memanfaatkan pola interaksi pengguna lain. Metode ini bekerja berdasarkan kesamaan preferensi di antara pengguna atau kesamaan pola rating antar buku. Sistem ini menggunakan data historis, seperti rating buku atau aktivitas pengguna, untuk memberikan rekomendasi.
+
+Kelebihan :
+- Dapat memberikan rekomendasi tanpa memerlukan informasi atribut item (misalnya, deskripsi atau metadata buku).
+- Mampu menangkap pola tren kolektif dari data interaksi pengguna.
+- Memberikan rekomendasi yang bersifat dinamis, sesuai dengan perilaku pengguna lain yang terus berkembang.
+
+Kekurangan :
+- Cold-Start Problem: Sulit memberikan rekomendasi untuk pengguna baru tanpa data historis atau untuk buku baru tanpa rating.
+- Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
+- Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
+
+
 ## TF-IDF
 Sebelum data digunakan untuk pemodelan, data perlu diubah terlebih dahulu kedalam bentuk numerik agar dapat digunakan sebagai masukan pada Model Machine Learning nantinya. Salah satu teknik yang akan digunakan pada proyek ini adalah TF-IDF (Term Frequency-Inverse Document Frequency).
 TF-IDF bertujuan untuk mengukur seberapa penting suatu kata terhadap kata-kata lain dalam dokumen. TF-IDF adalah skema representasi yang umum digunakan untuk sistem pengambilan informasi dan ekstraksi dokumen yang relevan dengan kueri tertentu.
 pada proyek ini TF-IDF dapat digunakan dengan cara memanggil fungsi TfidfVectorizer() pada sklearn.
+- Teknik ini digunakan untuk mengubah deskripsi buku menjadi representasi numerik.
+- Representasi ini membantu menghitung bobot pentingnya kata dalam konteks dokumen.
+- Implementasi:
+  
+      from sklearn.feature_extraction.text import TfidfVectorizer
+      vectorizer = TfidfVectorizer(stop_words='english')
+      tfidf_matrix = vectorizer.fit_transform(books_clean['Book-Title'])
+
 
 ## Cosine Similarity
 Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
+- Metode ini menghitung kemiripan antar buku berdasarkan vektor hasil TF-IDF.
+- Implementasi:
+      
+      from sklearn.metrics.pairwise import cosine_similarity
+      cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
 Rumus Cosine Similarity
 ![image](https://github.com/user-attachments/assets/9c8a0447-6cea-435b-b1db-27c93c0994fb)
 Hasil dari perhitungan cosine similarity adalah nilai antara -1 dan 1. Nilai 1 menunjukkan bahwa dua vektor sepenuhnya sejajar (sama persis), nilai 0 menunjukkan bahwa vektor tersebut tegak lurus (tidak ada kesamaan), dan nilai -1 menunjukkan bahwa dua vektor sejajar tetapi berlawanan arah.
-
 Pada penerepan Cosine Similarity dapat diakses dengan menggunakan sklearn dan memanggil fungsi cosine_similarity
-
 Untuk memudahkan pengguna mendapatkan buku yang sesuai atau relavan dapat menggunakan pendekatan Content Based Filtering yang memberikan item (buku) yang sesuai berdasarkan kesukaan pengguna sebelumnya. Content Based Filtering mempelajari minat pengguna berdasarkan dari data objek yang disukai di masa lalu. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
 ## Result
@@ -245,16 +298,20 @@ Pada Evaluasi hasil model, mendapatkan hasil sebagai berikut:
 ## Collaborative Filtering
 Perhitungan nilai akurasi rekomendasi dengan pendekatan Collaborative Filtering dilakukan dengan pendekatan Root Mean Square Error (RMSE). RMSE adalah ukuran perbedaan antara angka (nilai populasi dan sampel) yang sering diterapkan yang diprediksi oleh estimator atau mode. RMSE menggambarkan deviasi standar sampel dari perbedaan antara nilai prediksi dan nilai observasi.
 
-## Dampak terhadap Business Understanding
-- Sistem rekomendasi meningkatkan pengalaman pengguna dalam menemukan buku baru.
-- Tujuan untuk meningkatkan personalisasi tercapai dengan baik.
-- Solusi membantu memperluas eksplorasi buku dan mendorong penjualan.
-
 ![image](https://github.com/user-attachments/assets/1ac954c2-2579-4e0d-8dd6-e643cd8f756d)
 
 Berikut hasil RMSE pada sistem rekomendasi:
 
     RMSE: 0.35289653979879504  
 
+## Dampak terhadap Business Understanding
+1. Menjawab Problem Statement
+   - Model berhasil membantu pengguna menemukan buku baru yang belum pernah mereka baca sebelumnya.
+   - Dengan rekomendasi berbasis kesamaan deskripsi, model juga mempersonalisasi pengalaman pengguna.
+2. Mencapai Goals
+   - Tujuan untuk meningkatkan eksplorasi pengguna terhadap kategori buku baru berhasil dicapai melalui pendekatan content-based filtering.
+3. Dampak pada Solusi
+   - Sistem rekomendasi ini memiliki potensi besar untuk meningkatkan kepuasan pengguna, memperluas eksposur buku, dan mendorong penjualan.
+     
 ## Conclusion
 Sistem rekomendasi buku ini berhasil memberikan rekomendasi yang relevan dengan kebutuhan pengguna. Evaluasi menggunakan precision, recall, F1-score, dan RMSE menunjukkan performa model yang sangat baik.
