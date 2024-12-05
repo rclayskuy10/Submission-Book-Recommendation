@@ -180,20 +180,6 @@ Kekurangan :
 - Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
 - Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
 
-
-## TF-IDF
-Sebelum data digunakan untuk pemodelan, data perlu diubah terlebih dahulu kedalam bentuk numerik agar dapat digunakan sebagai masukan pada Model Machine Learning nantinya. Salah satu teknik yang akan digunakan pada proyek ini adalah TF-IDF (Term Frequency-Inverse Document Frequency).
-TF-IDF bertujuan untuk mengukur seberapa penting suatu kata terhadap kata-kata lain dalam dokumen. TF-IDF adalah skema representasi yang umum digunakan untuk sistem pengambilan informasi dan ekstraksi dokumen yang relevan dengan kueri tertentu.
-pada proyek ini TF-IDF dapat digunakan dengan cara memanggil fungsi TfidfVectorizer() pada sklearn.
-- Teknik ini digunakan untuk mengubah deskripsi buku menjadi representasi numerik.
-- Representasi ini membantu menghitung bobot pentingnya kata dalam konteks dokumen.
-- Implementasi:
-  
-      from sklearn.feature_extraction.text import TfidfVectorizer
-      vectorizer = TfidfVectorizer(stop_words='english')
-      tfidf_matrix = vectorizer.fit_transform(books_clean['Book-Title'])
-
-
 ## Cosine Similarity
 Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
 - Metode ini menghitung kemiripan antar buku berdasarkan vektor hasil TF-IDF.
