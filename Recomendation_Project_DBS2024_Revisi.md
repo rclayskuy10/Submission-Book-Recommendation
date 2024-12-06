@@ -271,8 +271,6 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
 | 8 |                           The Cases That Haunt Us |    John Douglas |   
 | 9 | JOURNEY INTO DARKNESS (Lisa Drew Books (Paperb... | John E. Douglas |   
 
-# Evaluation
-Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
 
 ## Hasil Training Model 
 |   |                                                                                              |                                                        |
