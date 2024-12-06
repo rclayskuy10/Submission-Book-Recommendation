@@ -107,6 +107,64 @@ Jumlah total pengguna yang tercatat dalam data ini adalah 105.283. Berikut adala
 Persiapan data merupakan langkah penting dalam pengembangan model machine learning. Pada proyek ini, proses Data Preparation menjadi krusial untuk memastikan hasil analisis dan pemodelan yang akurat. Data yang tidak dipersiapkan dengan baik dapat memengaruhi kualitas model secara signifikan.
 Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
 
+## Data Preparation untuk Content-Based Filtering
+1. **Membersihkan Data pada Kolom Year-Of-Publication**
+   - Menghapus data tidak valid pada kolom `Year-Of-Publication` dan mengonversinya menjadi tipe integer.
+   - Code:
+     ```python
+     books['Year-Of-Publication'] = pd.to_numeric(books['Year-Of-Publication'], errors='coerce')
+     books = books.dropna(subset=['Year-Of-Publication'])
+     books['Year-Of-Publication'] = books['Year-Of-Publication'].astype(int)
+     ```
+
+2. **Menghapus Kolom yang Tidak Relevan**
+   - Menghapus kolom `Image-URL-S`, `Image-URL-M`, dan `Image-URL-L` dari dataframe `books` karena tidak diperlukan untuk analisis atau pemodelan.
+   - Code:
+     ```python
+     books = books.drop(columns=['Image-URL-S', 'Image-URL-M', 'Image-URL-L'])
+     ```
+
+3. **Membuat Dataframe dengan Kolom Penting**
+   - Membuat dataframe baru `books_df` yang hanya berisi kolom `ISBN`, `Book-Rating`, `Title`, `Author`, `Year-Of-Publication`, dan `Publisher`.
+   - Code:
+     ```python
+     books_df = books[['ISBN', 'Book-Rating', 'Book-Title', 'Book-Author', 'Year-Of-Publication', 'Publisher']]
+     ```
+
+## Data Preparation untuk Collaborative Filtering
+1. **Encoding Data**
+   - Mengonversi kolom `User-ID` dan `ISBN` menjadi angka terurut (encoding) untuk kompatibilitas dengan model machine learning.
+   - Code:
+     ```python
+     from sklearn.preprocessing import LabelEncoder
+     label_encoder = LabelEncoder()
+     ratings['User-ID'] = label_encoder.fit_transform(ratings['User-ID'])
+     ratings['ISBN'] = label_encoder.fit_transform(ratings['ISBN'])
+     ```
+
+2. **Menambah Kolom Hasil Encoding**
+   - Menambahkan kolom hasil encoding `User-ID` dan `ISBN` ke dataframe utama.
+   - Code:
+     ```python
+     df['User-ID-Encoded'] = ratings['User-ID']
+     df['ISBN-Encoded'] = ratings['ISBN']
+     ```
+
+3. **Konversi Tipe Data Book-Rating**
+   - Mengonversi kolom `Book-Rating` menjadi tipe `float32` untuk mempercepat proses pemodelan dan mengurangi penggunaan memori.
+   - Code:
+     ```python
+     ratings['Book-Rating'] = ratings['Book-Rating'].astype('float32')
+     ```
+
+4. **Mengurutkan Data dan Mengonversi ke List**
+   - Mengurutkan dataframe berdasarkan kolom tertentu untuk mempermudah pengolahan data.
+   - Code:
+     ```python
+     fix_books = books.sort_values(by=['Year-Of-Publication']).reset_index(drop=True)
+     fix_books_list = fix_books.values.tolist()
+     ```
+
 ## Sampling Data
 Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan untuk sistem rekomendasi. Sampling dilakukan untuk mempercepat proses analisis dan pelatihan model, tanpa mengurangi kualitas data yang diperlukan, dapat menggunakan code berikut:
 
@@ -181,18 +239,6 @@ Hasil dari perhitungan cosine similarity adalah nilai antara -1 dan 1. Nilai 1 m
 Pada penerepan Cosine Similarity dapat diakses dengan menggunakan sklearn dan memanggil fungsi cosine_similarity
 Untuk memudahkan pengguna mendapatkan buku yang sesuai atau relavan dapat menggunakan pendekatan Content Based Filtering yang memberikan item (buku) yang sesuai berdasarkan kesukaan pengguna sebelumnya. Content Based Filtering mempelajari minat pengguna berdasarkan dari data objek yang disukai di masa lalu. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
-
-## Cosine Similarity
-Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. 
-Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
-- Metode ini menghitung kemiripan antar buku berdasarkan vektor hasil TF-IDF.
-- Implementasi:
-
-      from sklearn.metrics.pairwise import cosine_similarity
-      cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
-Rumus Cosine Similarity:
-![image](https://github.com/user-attachments/assets/9c8a0447-6cea-435b-b1db-27c93c0994fb)
 ## Collaborative-Based Filtering
 Pendekatan Collaborative-Based Filtering membantu pengguna menemukan buku yang relevan dengan cara memanfaatkan pola interaksi pengguna lain. Metode ini bekerja berdasarkan kesamaan preferensi di antara pengguna atau kesamaan pola rating antar buku. Sistem ini menggunakan data historis, seperti rating buku atau aktivitas pengguna, untuk memberikan rekomendasi.
 
