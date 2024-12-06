@@ -194,9 +194,6 @@ Kekurangan :
 - Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
 - Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
 
-# Evaluation
-Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
-
 ## Result
 Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan sistem rekomendasi:
 
@@ -212,6 +209,9 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
 | 7 | Crime Classification Manual : A Standard Syste... | John E. Douglas |   
 | 8 |                           The Cases That Haunt Us |    John Douglas |   
 | 9 | JOURNEY INTO DARKNESS (Lisa Drew Books (Paperb... | John E. Douglas |   
+
+# Evaluation
+Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
 
 ## Hasil Training Model 
 |   |                                                                                              |                                                        |
