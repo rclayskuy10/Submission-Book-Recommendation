@@ -167,19 +167,6 @@ Kekurangan:
 - Merekomendasikan item yang serupa
 - Tidak Mampu Menangani Perubahan Selera Pengguna
 
-## Collaborative-Based Filtering
-Pendekatan Collaborative-Based Filtering membantu pengguna menemukan buku yang relevan dengan cara memanfaatkan pola interaksi pengguna lain. Metode ini bekerja berdasarkan kesamaan preferensi di antara pengguna atau kesamaan pola rating antar buku. Sistem ini menggunakan data historis, seperti rating buku atau aktivitas pengguna, untuk memberikan rekomendasi.
-
-Kelebihan :
-- Dapat memberikan rekomendasi tanpa memerlukan informasi atribut item (misalnya, deskripsi atau metadata buku).
-- Mampu menangkap pola tren kolektif dari data interaksi pengguna.
-- Memberikan rekomendasi yang bersifat dinamis, sesuai dengan perilaku pengguna lain yang terus berkembang.
-
-Kekurangan :
-- Cold-Start Problem: Sulit memberikan rekomendasi untuk pengguna baru tanpa data historis atau untuk buku baru tanpa rating.
-- Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
-- Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
-
 ## Cosine Similarity
 Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
 - Metode ini menghitung kemiripan antar buku berdasarkan vektor hasil TF-IDF.
@@ -193,6 +180,22 @@ Rumus Cosine Similarity
 Hasil dari perhitungan cosine similarity adalah nilai antara -1 dan 1. Nilai 1 menunjukkan bahwa dua vektor sepenuhnya sejajar (sama persis), nilai 0 menunjukkan bahwa vektor tersebut tegak lurus (tidak ada kesamaan), dan nilai -1 menunjukkan bahwa dua vektor sejajar tetapi berlawanan arah.
 Pada penerepan Cosine Similarity dapat diakses dengan menggunakan sklearn dan memanggil fungsi cosine_similarity
 Untuk memudahkan pengguna mendapatkan buku yang sesuai atau relavan dapat menggunakan pendekatan Content Based Filtering yang memberikan item (buku) yang sesuai berdasarkan kesukaan pengguna sebelumnya. Content Based Filtering mempelajari minat pengguna berdasarkan dari data objek yang disukai di masa lalu. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
+
+## Collaborative-Based Filtering
+Pendekatan Collaborative-Based Filtering membantu pengguna menemukan buku yang relevan dengan cara memanfaatkan pola interaksi pengguna lain. Metode ini bekerja berdasarkan kesamaan preferensi di antara pengguna atau kesamaan pola rating antar buku. Sistem ini menggunakan data historis, seperti rating buku atau aktivitas pengguna, untuk memberikan rekomendasi.
+
+Kelebihan :
+- Dapat memberikan rekomendasi tanpa memerlukan informasi atribut item (misalnya, deskripsi atau metadata buku).
+- Mampu menangkap pola tren kolektif dari data interaksi pengguna.
+- Memberikan rekomendasi yang bersifat dinamis, sesuai dengan perilaku pengguna lain yang terus berkembang.
+
+Kekurangan :
+- Cold-Start Problem: Sulit memberikan rekomendasi untuk pengguna baru tanpa data historis atau untuk buku baru tanpa rating.
+- Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
+- Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
+
+# Evaluation
+Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
 
 ## Result
 Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan sistem rekomendasi:
@@ -254,10 +257,7 @@ Berikut hasil 10 Top rekomendasi buku yang telah direkomendasikan berdasarkan si
     - The Summons
     - Cold Mountain
     - Scarlet Feather
-
-
-# Evaluation
-Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
+    - 
 ## Content Based Filtering
 Untuk mengukur seberapa bagus akurasi rekomendasi, disini menggunakan 3 evaluasi yaitu Precision, Recall dan F1-Score
 - Precision Precision adalah perbandingan antara True Positive (TP) dengan banyaknya data yang diprediksi positif. rumus untuk Precision
