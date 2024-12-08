@@ -167,6 +167,7 @@ Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
 
 ## Sampling Data
 Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan untuk sistem rekomendasi. Sampling dilakukan untuk mempercepat proses analisis dan pelatihan model, tanpa mengurangi kualitas data yang diperlukan, dapat menggunakan code berikut:
+
     ```python
     sampled_books = books.sample(frac=0.1, random_state=42)
     sampled_ratings = ratings[ratings['ISBN'].isin(sampled_books['ISBN'])]
@@ -174,11 +175,13 @@ Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan un
 
 ## Intergration Data
 Pada tahap ini menggabungkan data Books dan Ratings agar dapat digunakan dalam pemodelan nantinya. untuk melakukan penggabungan data, dapat menggunakan code berikut:
+
     ```python
     books_rating = ratings.merge(books, on='ISBN', how='left')
     ```
 ## Missing Value
 Pada proses penggabung bisa saja terdapat missing value, sehingga perlu melakukan pengecekan agar tidak terjadi error nantinya dalam proses pemodelan. Pada DataFrame terdapat missing value berjumlah 118.648      pada variable Book-Title, Book-Author, Year-Of-Publication dan Publisher. Untuk mengatasi ini akan melakukan penghapusan pada data yang terdapat missing value dengan code berikut :
+
     ```python
     books_clean = books_rating.dropna()
     ```
@@ -186,11 +189,13 @@ Sebelumnya, terdapat rating yang bernilai 0, pada dasarnya rating tidak dimulai 
 
 ## Duplicated
 Pada sebuah data bisa terdapat duplikat, karena dalam pemodelan ini hanya akan menggunakan data unik, sehingga akan melakukan pembersihan pada data yang duplikat, dengan code berikut:
+
     ```python
     preparation = books_clean.drop_duplicates('placeID')
     ```
 ## Ekstraksi Fitur dengan TF-IDF
 Untuk pendekatan Content-Based Filtering, deskripsi buku diubah menjadi representasi numerik menggunakan TF-IDF, dapat menggunakan code berikut: 
+
     ```python
     from sklearn.feature_extraction.text import TfidfVectorizer
     vectorizer = TfidfVectorizer(stop_words='english')
@@ -198,6 +203,7 @@ Untuk pendekatan Content-Based Filtering, deskripsi buku diubah menjadi represen
     ```
 ## Encode Label
 Beberapa atribut yang berbentuk kategori (seperti User-ID dan ISBN) diubah menjadi representasi numerik menggunakan encoding untuk memastikan kompatibilitas dengan algoritma machine learning, dengan code berikut :
+
     ```python
     from sklearn.preprocessing import LabelEncoder
     label_encoder = LabelEncoder()
@@ -206,6 +212,7 @@ Beberapa atribut yang berbentuk kategori (seperti User-ID dan ISBN) diubah menja
     ```
 ## Split Data
 Dataset dibagi menjadi training dan testing untuk mengevaluasi performa model, dengan code berikut :
+
     ```python
     from sklearn.model_selection import train_test_split
     train_data, test_data = train_test_split(ratings, test_size=0.2, random_state=42)
