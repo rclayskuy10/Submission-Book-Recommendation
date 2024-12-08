@@ -213,17 +213,46 @@ Dataset dibagi menjadi training dan testing untuk mengevaluasi performa model, d
 Pada Modelling sistem rekomendasi akan menggunakan 2 pendeketan yaitu Metode Content Based Filtering dan Collaborative Filtering
 
 ## Content Based Filtering
-Untuk memudahkan pengguna mendapatkan buku yang sesuai atau relavan dapat menggunakan pendekatan Content Based Filtering yang memberikan item (buku) yang sesuai berdasarkan kesukaan pengguna sebelumnya. Content Based Filtering mempelajari minat pengguna berdasarkan dari data objek yang disukai di masa lalu. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
-Berikut Kelebihan dan Kekurangan Content Based Filtering:
+### **Penjelasan**
+Pendekatan ini menggunakan deskripsi atau atribut buku untuk membuat rekomendasi. Dalam sistem ini, representasi numerik buku dibuat menggunakan **TF-IDF** (Term Frequency-Inverse Document Frequency) untuk menangkap pentingnya kata-kata unik dalam deskripsi buku. Kemudian, digunakan **Cosine Similarity** untuk menghitung kemiripan antar buku.
 
-Kelebihan :
-- Memberikan rekomendasi berdasarkan preferensi pengguna
-- Tidak bergantung pada Data Eksternal, seperti item populer atau pengguna lain
-- Dapat memberikan rekomendasi terhadap item baru
+- **Kelebihan**:
+  1. Tidak memerlukan data pengguna lain, hanya data buku.
+  2. Dapat merekomendasikan item baru dengan karakteristik serupa.
+  3. Menghasilkan rekomendasi yang lebih terpersonalisasi.
 
-Kekurangan:
-- Merekomendasikan item yang serupa
-- Tidak Mampu Menangani Perubahan Selera Pengguna
+- **Kekurangan**:
+  1. Cenderung hanya merekomendasikan buku yang mirip dengan preferensi sebelumnya (serupa).
+  2. Tidak mampu menangani perubahan selera pengguna.
+  3. Tidak bisa memberikan rekomendasi jika data atribut buku tidak mencukupi.
+
+#### **Cara Kerja Model**
+1. **Ekstraksi Fitur Buku**:
+   - Menggunakan **TF-IDF** untuk mengonversi judul atau deskripsi buku menjadi vektor numerik.
+   - Contoh implementasi:
+     ```python
+     from sklearn.feature_extraction.text import TfidfVectorizer
+     vectorizer = TfidfVectorizer(stop_words='english')
+     tfidf_matrix = vectorizer.fit_transform(book_titles)
+     ```
+2. **Penghitungan Kemiripan**:
+   - Menggunakan **Cosine Similarity** untuk menghitung derajat kemiripan antar buku.
+     ```python
+     from sklearn.metrics.pairwise import cosine_similarity
+     cosine_sim = cosine_similarity(tfidf_matrix)
+     ```
+
+#### **Hasil Top-N Recommendation**
+Berikut 5 buku teratas yang direkomendasikan untuk pengguna berdasarkan kemiripan dengan buku yang disukai:
+| No | Judul Buku                             | Penulis          |
+|----|----------------------------------------|------------------|
+| 1  | The Partner                           | John Grisham     |
+| 2  | Cliente, El                           | John Grisham     |
+| 3  | The Runaway Jury                      | John Grisham     |
+| 4  | The Street Lawyer                     | John Grisham     |
+| 5  | Java Software Solutions               | John Lewis       |
+
+---
 
 ## Cosine Similarity
 Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
@@ -240,17 +269,48 @@ Pada penerepan Cosine Similarity dapat diakses dengan menggunakan sklearn dan me
 Untuk memudahkan pengguna mendapatkan buku yang sesuai atau relavan dapat menggunakan pendekatan Content Based Filtering yang memberikan item (buku) yang sesuai berdasarkan kesukaan pengguna sebelumnya. Content Based Filtering mempelajari minat pengguna berdasarkan dari data objek yang disukai di masa lalu. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
 ## Collaborative-Based Filtering
-Pendekatan Collaborative-Based Filtering membantu pengguna menemukan buku yang relevan dengan cara memanfaatkan pola interaksi pengguna lain. Metode ini bekerja berdasarkan kesamaan preferensi di antara pengguna atau kesamaan pola rating antar buku. Sistem ini menggunakan data historis, seperti rating buku atau aktivitas pengguna, untuk memberikan rekomendasi.
+### **Penjelasan**
+Pendekatan ini memanfaatkan data historis interaksi pengguna seperti rating untuk memberikan rekomendasi berdasarkan pola preferensi pengguna lain.
 
-Kelebihan :
-- Dapat memberikan rekomendasi tanpa memerlukan informasi atribut item (misalnya, deskripsi atau metadata buku).
-- Mampu menangkap pola tren kolektif dari data interaksi pengguna.
-- Memberikan rekomendasi yang bersifat dinamis, sesuai dengan perilaku pengguna lain yang terus berkembang.
+- **Kelebihan**:
+  1. Tidak memerlukan informasi atribut buku.
+  2. Dapat menangkap tren kolektif dari data interaksi pengguna.
+  3. Mampu memberikan rekomendasi di luar preferensi langsung pengguna.
 
-Kekurangan :
-- Cold-Start Problem: Sulit memberikan rekomendasi untuk pengguna baru tanpa data historis atau untuk buku baru tanpa rating.
-- Bergantung pada data interaksi yang besar; performa menurun jika data sparsity (kepadatan data) rendah.
-- Sulit menangani perubahan preferensi pengguna secara cepat karena pola diambil dari data historis.
+- **Kekurangan**:
+  1. Sulit menangani pengguna atau buku baru (*cold-start problem*).
+  2. Bergantung pada ketersediaan data interaksi.
+  3. Rentan terhadap data sparsity (jumlah data yang minim).
+
+#### **Cara Kerja Model**
+1. **Matrix Factorization**:
+   - Menggunakan pendekatan *latent factor* untuk memetakan hubungan antara pengguna dan buku.
+   - Model melibatkan faktor tersembunyi yang menjelaskan preferensi pengguna.
+   - Contoh:
+     ```python
+     from surprise import SVD
+     from surprise.model_selection import cross_validate
+
+     model = SVD()
+     cross_validate(model, data, measures=['RMSE'], cv=5, verbose=True)
+     ```
+2. **Evaluasi dengan RMSE**:
+   - Menghitung *Root Mean Squared Error* untuk mengevaluasi akurasi prediksi.
+     ```python
+     from sklearn.metrics import mean_squared_error
+     rmse = np.sqrt(mean_squared_error(true_ratings, predicted_ratings))
+     print(f'RMSE: {rmse}')
+     ```
+
+#### **Hasil Top-N Recommendation**
+Berikut 5 buku teratas yang direkomendasikan:
+| No | Judul Buku                             | Penulis          |
+|----|----------------------------------------|------------------|
+| 1  | Seabiscuit: An American Legend         | Laura Hillenbrand|
+| 2  | The Phantom Tollbooth                  | Norton Juster    |
+| 3  | Cold Sassy Tree                        | Olive Ann Burns  |
+| 4  | Forbidden Magic                        | Cheyenne McCray  |
+| 5  | Attack Of The Deranged Mutant Killer Snow Goons | Bill Watterson |
 
 # Evaluation
 Perhitungan akurasi rekomendasi dilakukan untuk mencari nilai error atau kesalahan dari sistem rekomendasi. Perhitungan ini dilakukan dengan membandingkan nilai prediksi dan nilai aktual yang diberikan pengguna untuk setiap pasangan pengguna dan item.
