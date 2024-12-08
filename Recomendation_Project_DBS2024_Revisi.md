@@ -168,10 +168,10 @@ Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
 ## Sampling Data
 Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan untuk sistem rekomendasi. Sampling dilakukan untuk mempercepat proses analisis dan pelatihan model, tanpa mengurangi kualitas data yang diperlukan, dapat menggunakan code berikut:
 
-    ```python
-    sampled_books = books.sample(frac=0.1, random_state=42)
-    sampled_ratings = ratings[ratings['ISBN'].isin(sampled_books['ISBN'])]
-    ```
+```python
+sampled_books = books.sample(frac=0.1, random_state=42)
+sampled_ratings = ratings[ratings['ISBN'].isin(sampled_books['ISBN'])]
+```
 
 ## Intergration Data
 Pada tahap ini menggabungkan data Books dan Ratings agar dapat digunakan dalam pemodelan nantinya. untuk melakukan penggabungan data, dapat menggunakan code berikut:
