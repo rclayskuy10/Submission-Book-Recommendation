@@ -167,48 +167,49 @@ Berikut tahapan Data Preparation yang dilakukan pada proyek ini:
 
 ## Sampling Data
 Dataset awal memiliki ukuran besar dengan beberapa atribut yang tidak relevan untuk sistem rekomendasi. Sampling dilakukan untuk mempercepat proses analisis dan pelatihan model, tanpa mengurangi kualitas data yang diperlukan, dapat menggunakan code berikut:
-
+    ```python
     sampled_books = books.sample(frac=0.1, random_state=42)
     sampled_ratings = ratings[ratings['ISBN'].isin(sampled_books['ISBN'])]
+    ```
 
 ## Intergration Data
 Pada tahap ini menggabungkan data Books dan Ratings agar dapat digunakan dalam pemodelan nantinya. untuk melakukan penggabungan data, dapat menggunakan code berikut:
-
+    ```python
     books_rating = ratings.merge(books, on='ISBN', how='left')
-
+    ```
 ## Missing Value
 Pada proses penggabung bisa saja terdapat missing value, sehingga perlu melakukan pengecekan agar tidak terjadi error nantinya dalam proses pemodelan. Pada DataFrame terdapat missing value berjumlah 118.648      pada variable Book-Title, Book-Author, Year-Of-Publication dan Publisher. Untuk mengatasi ini akan melakukan penghapusan pada data yang terdapat missing value dengan code berikut :
-
+    ```python
     books_clean = books_rating.dropna()
-    
+    ```
 Sebelumnya, terdapat rating yang bernilai 0, pada dasarnya rating tidak dimulai dari 0 melainkan dari satu. penyebab rating 0 bisa berbagai hal seperti pengguna tidak mengisi penilaian sehingga sistem akan memasukan nilai 0. untuk itu akan melakukan penghapusan juga pada data yang memiliki rating 0.
 
 ## Duplicated
 Pada sebuah data bisa terdapat duplikat, karena dalam pemodelan ini hanya akan menggunakan data unik, sehingga akan melakukan pembersihan pada data yang duplikat, dengan code berikut:
-
+    ```python
     preparation = books_clean.drop_duplicates('placeID')
-
+    ```
 ## Ekstraksi Fitur dengan TF-IDF
 Untuk pendekatan Content-Based Filtering, deskripsi buku diubah menjadi representasi numerik menggunakan TF-IDF, dapat menggunakan code berikut: 
-
+    ```python
     from sklearn.feature_extraction.text import TfidfVectorizer
     vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = vectorizer.fit_transform(books_clean['Book-Title'])
-    
+    ```
 ## Encode Label
 Beberapa atribut yang berbentuk kategori (seperti User-ID dan ISBN) diubah menjadi representasi numerik menggunakan encoding untuk memastikan kompatibilitas dengan algoritma machine learning, dengan code berikut :
-
+    ```python
     from sklearn.preprocessing import LabelEncoder
     label_encoder = LabelEncoder()
     ratings['User-ID'] = label_encoder.fit_transform(ratings['User-ID'])
     ratings['ISBN'] = label_encoder.fit_transform(ratings['ISBN'])
-
+    ```
 ## Split Data
 Dataset dibagi menjadi training dan testing untuk mengevaluasi performa model, dengan code berikut :
-
+    ```python
     from sklearn.model_selection import train_test_split
     train_data, test_data = train_test_split(ratings, test_size=0.2, random_state=42)
-
+    ```
 # Modelling and Result
 Pada Modelling sistem rekomendasi akan menggunakan 2 pendeketan yaitu Metode Content Based Filtering dan Collaborative Filtering
 
@@ -258,10 +259,10 @@ Berikut 5 buku teratas yang direkomendasikan untuk pengguna berdasarkan kemiripa
 Cosine similarity adalah metrik yang digunakan untuk mengukur sejauh mana dua vektor arah mendekati sejajar satu sama lain. Dalam sistem rekomendasi, cosine similarity digunakan untuk menentukan seberapa mirip dua item atau dua profil pengguna berdasarkan preferensi mereka terhadap fitur-fitur tertentu. Semakin tinggi nilai cosine similarity antara dua item, semakin mirip kedua item tersebut.
 - Metode ini menghitung kemiripan antar buku berdasarkan vektor hasil TF-IDF.
 - Implementasi:
-      
+      ```python
       from sklearn.metrics.pairwise import cosine_similarity
       cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
+      ```
 Rumus Cosine Similarity
 ![image](https://github.com/user-attachments/assets/9c8a0447-6cea-435b-b1db-27c93c0994fb)
 Hasil dari perhitungan cosine similarity adalah nilai antara -1 dan 1. Nilai 1 menunjukkan bahwa dua vektor sepenuhnya sejajar (sama persis), nilai 0 menunjukkan bahwa vektor tersebut tegak lurus (tidak ada kesamaan), dan nilai -1 menunjukkan bahwa dua vektor sejajar tetapi berlawanan arah.
